@@ -1,1 +1,2 @@
 Configure miss: whether pthread flag is sufficient with -nostdlib
+Configure miss: OPENSSL_init_ssl in -lssl
