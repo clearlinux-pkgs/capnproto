@@ -4,14 +4,14 @@
 #
 Name     : capnproto
 Version  : 0.7.0
-Release  : 3
+Release  : 4
 URL      : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Source0  : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Summary  : Basic utility library called KJ
 Group    : Development/Tools
 License  : MIT
-Requires: capnproto-bin
-Requires: capnproto-license
+Requires: capnproto-bin = %{version}-%{release}
+Requires: capnproto-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : openssl-dev
 
@@ -23,10 +23,18 @@ RPC system.  Think JSON, except binary.  Or think of Google's Protocol Buffers
 (http://protobuf.googlecode.com), except faster.  In fact, in benchmarks,
 Cap'n Proto is INFINITY TIMES faster than Protocol Buffers.
 
+%package abi
+Summary: abi components for the capnproto package.
+Group: Default
+
+%description abi
+abi components for the capnproto package.
+
+
 %package bin
 Summary: bin components for the capnproto package.
 Group: Binaries
-Requires: capnproto-license
+Requires: capnproto-license = %{version}-%{release}
 
 %description bin
 bin components for the capnproto package.
@@ -35,8 +43,8 @@ bin components for the capnproto package.
 %package dev
 Summary: dev components for the capnproto package.
 Group: Development
-Requires: capnproto-bin
-Provides: capnproto-devel
+Requires: capnproto-bin = %{version}-%{release}
+Provides: capnproto-devel = %{version}-%{release}
 
 %description dev
 dev components for the capnproto package.
@@ -58,7 +66,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536639271
+export SOURCE_DATE_EPOCH=1542386282
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -70,14 +78,26 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1536639271
+export SOURCE_DATE_EPOCH=1542386282
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/capnproto
-cp LICENSE.txt %{buildroot}/usr/share/doc/capnproto/LICENSE.txt
+mkdir -p %{buildroot}/usr/share/package-licenses/capnproto
+cp LICENSE.txt %{buildroot}/usr/share/package-licenses/capnproto/LICENSE.txt
 %make_install
 
 %files
 %defattr(-,root,root,-)
+
+%files abi
+%defattr(-,root,root,-)
+/usr/share/abi/libcapnp-0.7.0.so.abi
+/usr/share/abi/libcapnp-json-0.7.0.so.abi
+/usr/share/abi/libcapnp-rpc-0.7.0.so.abi
+/usr/share/abi/libcapnpc-0.7.0.so.abi
+/usr/share/abi/libkj-0.7.0.so.abi
+/usr/share/abi/libkj-async-0.7.0.so.abi
+/usr/share/abi/libkj-http-0.7.0.so.abi
+/usr/share/abi/libkj-test-0.7.0.so.abi
+/usr/share/abi/libkj-tls-0.7.0.so.abi
 
 %files bin
 %defattr(-,root,root,-)
@@ -190,6 +210,8 @@ cp LICENSE.txt %{buildroot}/usr/share/doc/capnproto/LICENSE.txt
 /usr/lib64/libkj-http.so
 /usr/lib64/libkj-test-0.7.0.so
 /usr/lib64/libkj-test.so
+/usr/lib64/libkj-tls-0.7.0.so
+/usr/lib64/libkj-tls.so
 /usr/lib64/libkj.so
 /usr/lib64/pkgconfig/capnp-json.pc
 /usr/lib64/pkgconfig/capnp-rpc.pc
@@ -200,5 +222,5 @@ cp LICENSE.txt %{buildroot}/usr/share/doc/capnproto/LICENSE.txt
 /usr/lib64/pkgconfig/kj.pc
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/capnproto/LICENSE.txt
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/capnproto/LICENSE.txt
