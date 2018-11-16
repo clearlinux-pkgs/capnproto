@@ -4,7 +4,7 @@
 #
 Name     : capnproto
 Version  : 0.7.0
-Release  : 4
+Release  : 5
 URL      : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Source0  : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Summary  : Basic utility library called KJ
