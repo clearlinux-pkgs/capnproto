@@ -4,7 +4,7 @@
 #
 Name     : capnproto
 Version  : 0.7.0
-Release  : 5
+Release  : 6
 URL      : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Source0  : https://capnproto.org/capnproto-c++-0.7.0.tar.gz
 Summary  : Basic utility library called KJ
@@ -22,14 +22,6 @@ Cap'n Proto is an insanely fast data interchange format and capability-based
 RPC system.  Think JSON, except binary.  Or think of Google's Protocol Buffers
 (http://protobuf.googlecode.com), except faster.  In fact, in benchmarks,
 Cap'n Proto is INFINITY TIMES faster than Protocol Buffers.
-
-%package abi
-Summary: abi components for the capnproto package.
-Group: Default
-
-%description abi
-abi components for the capnproto package.
-
 
 %package bin
 Summary: bin components for the capnproto package.
@@ -66,7 +58,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542386282
+export SOURCE_DATE_EPOCH=1542677518
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -78,7 +70,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1542386282
+export SOURCE_DATE_EPOCH=1542677518
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/capnproto
 cp LICENSE.txt %{buildroot}/usr/share/package-licenses/capnproto/LICENSE.txt
@@ -86,18 +78,6 @@ cp LICENSE.txt %{buildroot}/usr/share/package-licenses/capnproto/LICENSE.txt
 
 %files
 %defattr(-,root,root,-)
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libcapnp-0.7.0.so.abi
-/usr/share/abi/libcapnp-json-0.7.0.so.abi
-/usr/share/abi/libcapnp-rpc-0.7.0.so.abi
-/usr/share/abi/libcapnpc-0.7.0.so.abi
-/usr/share/abi/libkj-0.7.0.so.abi
-/usr/share/abi/libkj-async-0.7.0.so.abi
-/usr/share/abi/libkj-http-0.7.0.so.abi
-/usr/share/abi/libkj-test-0.7.0.so.abi
-/usr/share/abi/libkj-tls-0.7.0.so.abi
 
 %files bin
 %defattr(-,root,root,-)
